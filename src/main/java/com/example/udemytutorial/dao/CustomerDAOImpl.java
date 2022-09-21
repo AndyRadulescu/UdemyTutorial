@@ -26,9 +26,11 @@ public class CustomerDAOImpl implements CustomerDAO {
     }
 
     @Override
-    @Transactional
     public void saveCustomer(Customer customer) {
         Session currentSession = factory.openSession();
+        currentSession.beginTransaction();
+        System.out.println(customer);
         currentSession.save(customer);
+        currentSession.getTransaction().commit();
     }
 }

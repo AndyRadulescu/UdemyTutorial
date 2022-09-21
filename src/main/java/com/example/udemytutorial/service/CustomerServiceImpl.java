@@ -23,7 +23,6 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void saveCustomer(Customer customer) {
         customer.setId(UUID.randomUUID());
-        System.out.println(customer);
         customerDAO.saveCustomer(customer);
     }
 }
