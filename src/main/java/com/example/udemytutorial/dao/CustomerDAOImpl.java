@@ -20,7 +20,7 @@ public class CustomerDAOImpl implements CustomerDAO {
     public List<Customer> getCustomers() {
         Session currentSession = factory.openSession();
 
-        Query<Customer> query = currentSession.createQuery("from Customer", Customer.class);
+        Query<Customer> query = currentSession.createQuery("from Customer order by last_name", Customer.class);
         List<Customer> customers = query.getResultList();
         return customers;
     }
@@ -29,7 +29,6 @@ public class CustomerDAOImpl implements CustomerDAO {
     public void saveCustomer(Customer customer) {
         Session currentSession = factory.openSession();
         currentSession.beginTransaction();
-        System.out.println(customer);
         currentSession.save(customer);
         currentSession.getTransaction().commit();
     }
