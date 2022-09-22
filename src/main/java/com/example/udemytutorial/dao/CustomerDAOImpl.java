@@ -1,13 +1,15 @@
 package com.example.udemytutorial.dao;
 
 import com.example.udemytutorial.model.Customer;
-import java.util.List;
-import javax.transaction.Transactional;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import javax.transaction.Transactional;
+import java.util.List;
+import java.util.UUID;
 
 @Repository
 public class CustomerDAOImpl implements CustomerDAO {
@@ -29,7 +31,14 @@ public class CustomerDAOImpl implements CustomerDAO {
     public void saveCustomer(Customer customer) {
         Session currentSession = factory.openSession();
         currentSession.beginTransaction();
-        currentSession.save(customer);
+        System.out.println(customer);
+        currentSession.saveOrUpdate(customer);
         currentSession.getTransaction().commit();
+    }
+
+    @Override
+    public Customer getCustomer(UUID id) {
+        Session currentSession = factory.openSession();
+        return currentSession.get(Customer.class, id);
     }
 }

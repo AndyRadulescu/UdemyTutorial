@@ -25,4 +25,10 @@ public class CustomerServiceImpl implements CustomerService {
         customer.setId(UUID.randomUUID());
         customerDAO.saveCustomer(customer);
     }
+
+    @Override
+    @Transactional
+    public Customer getCustomer(UUID id) {
+        return customerDAO.getCustomer(id);
+    }
 }

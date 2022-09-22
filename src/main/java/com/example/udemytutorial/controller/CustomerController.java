@@ -2,14 +2,13 @@ package com.example.udemytutorial.controller;
 
 import com.example.udemytutorial.model.Customer;
 import com.example.udemytutorial.service.CustomerService;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("customer")
@@ -36,5 +35,13 @@ public class CustomerController {
         customerService.saveCustomer(customer);
 
         return "redirect:/customer/list";
+    }
+
+    @GetMapping("/showFormForUpdate")
+    public String showFormForUpdate(@RequestParam("customerId") UUID id, Model model) {
+        Customer customer = customerService.getCustomer(id);
+        System.out.println(customer);
+        model.addAttribute("customer", customer);
+        return "customer-form";
     }
 }
