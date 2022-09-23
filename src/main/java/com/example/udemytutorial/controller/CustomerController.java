@@ -40,8 +40,13 @@ public class CustomerController {
     @GetMapping("/showFormForUpdate")
     public String showFormForUpdate(@RequestParam("customerId") UUID id, Model model) {
         Customer customer = customerService.getCustomer(id);
-        System.out.println(customer);
         model.addAttribute("customer", customer);
         return "customer-form";
+    }
+
+    @GetMapping("/delete")
+    public String deleteCustomer(@RequestParam("customerId") UUID id) {
+        customerService.deleteCustomer(id);
+        return "redirect:/customer/list";
     }
 }

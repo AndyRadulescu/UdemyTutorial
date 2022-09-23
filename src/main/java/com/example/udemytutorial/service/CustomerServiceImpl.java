@@ -2,11 +2,12 @@ package com.example.udemytutorial.service;
 
 import com.example.udemytutorial.dao.CustomerDAO;
 import com.example.udemytutorial.model.Customer;
-import java.util.List;
-import java.util.UUID;
-import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+import java.util.List;
+import java.util.UUID;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -22,7 +23,9 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public void saveCustomer(Customer customer) {
-        customer.setId(UUID.randomUUID());
+        if (customer.getId() == null) {
+            customer.setId(UUID.randomUUID());
+        }
         customerDAO.saveCustomer(customer);
     }
 
@@ -30,5 +33,10 @@ public class CustomerServiceImpl implements CustomerService {
     @Transactional
     public Customer getCustomer(UUID id) {
         return customerDAO.getCustomer(id);
+    }
+
+    @Override
+    public void deleteCustomer(UUID id) {
+        customerDAO.deleteCustomer(id);
     }
 }

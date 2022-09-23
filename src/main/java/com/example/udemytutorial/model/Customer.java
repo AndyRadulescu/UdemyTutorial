@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name = "customer")
@@ -18,6 +19,7 @@ public class Customer {
 
     @Id
     @Column(name = "id")
+    @Type(type="org.hibernate.type.PostgresUUIDType")
     @Getter
     @Setter
     private UUID id;
