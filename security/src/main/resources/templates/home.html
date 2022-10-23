@@ -21,9 +21,14 @@ Authenticated user roles:
 
 <br>
 
-<p>
+<p sec:authorize="hasRole('MANAGER')">
   <a type="button" th:href="@{/leaders}">Leadership meeting</a>
   (Only for managers)
+</p>
+
+<p sec:authorize="hasRole('ADMIN')">
+  <a type="button" th:href="@{/systems}">ADMIN</a>
+  (Only for admins)
 </p>
 
 <form th:action="@{/logout}" method="post">
