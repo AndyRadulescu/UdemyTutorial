@@ -1,13 +1,25 @@
 version: '3.7'
 
 services:
-  instigo-database:
+  database-udemyTutorial:
     image: postgres:12.2
     container_name: udemyTutorial
     hostname: udemyTest
     restart: always
     ports:
       - '60000:5432'
+    environment:
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: 'postgres'
+      POSTGRES_DB: 'postgres'
+
+  database-security:
+    image: postgres:12.2
+    container_name: security
+    hostname: udemyTest
+    restart: always
+    ports:
+      - '60001:5432'
     environment:
       POSTGRES_USER: 'postgres'
       POSTGRES_PASSWORD: 'postgres'
